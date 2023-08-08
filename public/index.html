@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VLP AR Garden Tour</title>
+    <style>
+        /* Reset some default styles */
+        body,
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            /* Provides a more readable line spacing */
+            background-color: #f9f9f9;
+            /* Light grey background */
+            color: #333;
+            /* Dark grey text for better readability */
+            padding: 20px;
+            /* Padding around the edges of the page for breathing room */
+        }
+
+        img {
+            max-width: 100%;
+            /* Ensures images don't exceed the screen width */
+            height: auto;
+            /* Maintains the image's aspect ratio */
+            display: block;
+            /* Removes any gaps below images */
+            margin: 20px 0;
+            /* Gives images some vertical spacing */
+        }
+
+        p {
+            font-size: 18px;
+            /* Bigger than default for better readability on mobile */
+            margin-bottom: 20px;
+            /* Space between paragraphs */
+        }
+
+        a {
+            color: #007BFF;
+            /* Standard link color (blue) */
+            text-decoration: none;
+            /* Removes underlines */
+            font-size: 18px;
+            /* Matching font size for readability */
+            transition: color 0.3s ease;
+            /* Smooth transition for hover effects */
+        }
+
+        a:visited {
+            color: blue;
+            /* Ensuring visited links stay blue */
+        }
+
+        a:hover {
+            color: #0056b3;
+            /* Darker blue for hover effect */
+            text-decoration: underline;
+            /* Underline on hover for clarity */
+        }
+
+        /* Headers */
+        h1,
+        h2,
+        h3 {
+            margin-bottom: 15px;
+            /* Spacing after headers */
+        }
+
+        h1 {
+            font-size: 24px;
+            /* Suitable header size for mobile */
+        }
+
+        h2 {
+            font-size: 22px;
+        }
+
+        h3 {
+            font-size: 20px;
+        }
+
+        .noop{
+            pointer-events: none; /* Makes the link not clickable */
+            opacity: 0.5; /* Optionally make it look disabled or faded */
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="center" role="banner">VLP AR Garden Tour</h1>
+    <p class="center"><a id="project-link" class="noop">Take me to the project</a></p>
+</body>
+<script>
+    window.onload = async function () {
+        try {
+            // Fetch the link from the proxy server
+            const response = await fetch('./getLink');
+            const data = await response.json();
+            const link = data.link;  // Assuming the proxy returns a JSON object with a 'link' field
+
+            const aElement = document.querySelector('#project-link');
+            aElement.href = link;
+            aElement.classList.remove('noop');
+        } catch (error) {
+            console.error('Failed to fetch the link:', error);
+        }
+    }
+</script>
+
+</html>
